@@ -1,0 +1,45 @@
+
+/* Se lit de la manière suivante : les h1 qui sont dans un header */
+header > h1 {
+    color: red;
+}
+header > h1:hover {
+    font-style: italic;
+}
+/* Groupement de sélecteurs  */
+header h1, header h2 {
+    color: blue;
+}
+/* Selecteur par class. Le "." en css correspond à class en html */
+.col {
+    border: 5px solid black;
+    padding: 15px;
+    background-color: #ccc;
+    margin: 10px;
+}
+/* Sélecteur par id. Le "#" en css correpond à id en html */
+#col-1 {
+    border-color: red;
+}
+#col-2 {
+    border-color: violet;
+}
+#col-3 {
+    border-color: blueviolet;
+}
+#col-4 {
+    border-color: green;
+}
+
+
+/* Attention, je code exactement selon les standards du css */
+/* Au même niveau de précision de sélecteur, c'est le dernier
+appelé dans le code qui l'emporte. Si un sélecteur est plus précis
+que les autres, c'est lui qui l'emporte quelle que soit sa 
+position dans le code */
+h1 {
+    color: green;
+    border-bottom: 1px solid red;
+    font-size: 3em;
+}
+
