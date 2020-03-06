@@ -1,22 +1,20 @@
 
-/* Se lit de la manière suivante : les h1 qui sont dans un header */
-header > h1 {
-    color: red;
-}
-header > h1:hover {
-    font-style: italic;
-}
-/* Groupement de sélecteurs  */
-header h1, header h2 {
-    color: blue;
-}
 /* Selecteur par class. Le "." en css correspond à class en html */
 .col {
+    /* Les 3 propriétés de block */
     border: 5px solid black;
-    padding: 15px;
+    border-radius: 0;
+    padding: 2%;
+    
+    margin: 40px 30px 20px 10px;/* 40 en haut, 30 à droite ...  */
+    margin: 20px 20px; /* 40 en haut et en bas, 20 à gauche et à droite */
+    margin: 2%;/* 10px partout autour de ma boîte */
     background-color: #ccc;
-    margin: 10px;
+    /* Explication sur les propriétés de dimension */
+    width: 96%;
+    box-sizing: border-box;
 }
+
 /* Sélecteur par id. Le "#" en css correpond à id en html */
 #col-1 {
     border-color: red;
@@ -29,17 +27,5 @@ header h1, header h2 {
 }
 #col-4 {
     border-color: green;
-}
-
-
-/* Attention, je code exactement selon les standards du css */
-/* Au même niveau de précision de sélecteur, c'est le dernier
-appelé dans le code qui l'emporte. Si un sélecteur est plus précis
-que les autres, c'est lui qui l'emporte quelle que soit sa 
-position dans le code */
-h1 {
-    color: green;
-    border-bottom: 1px solid red;
-    font-size: 3em;
 }
 

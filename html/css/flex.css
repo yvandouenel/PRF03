@@ -1,0 +1,17 @@
+.container-flex {
+    /* Par défaut l'axe principal est horizontal */
+    display: flex;
+    border: 5px solid red;
+    height: 500px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    
+}
+.container-flex > div {
+    border: 3px solid black;
+
+    width: 30%;
+    /* width: 200px; */
+    
+}
