@@ -28,4 +28,50 @@
 #col-4 {
     border-color: green;
 }
+/* Menu */
+/* container flex */
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+/* Eléments enfant du container flex */
+.flex-center button {
+    margin: 0 1%; 
+    background-color: #6c757d;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px;
+}
+.flex-center button:hover {
+    background-color: #EEE;
+    color: #6c757d;
+    cursor: pointer;
+}
+/* logo */
+#logo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background-color: #6c757d;
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+#logo span {
+    font-size: 3em;
+    font-family: arial;
+}
+/* Général */
+.hidden {
+    clip: rect(1px,1px,1px,1px);
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    z-index: -1000;
+}
 
