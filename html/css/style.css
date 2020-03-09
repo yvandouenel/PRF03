@@ -1,33 +1,3 @@
-
-/* Selecteur par class. Le "." en css correspond à class en html */
-.col {
-    /* Les 3 propriétés de block */
-    border: 5px solid black;
-    border-radius: 0;
-    padding: 2%;
-    
-    margin: 40px 30px 20px 10px;/* 40 en haut, 30 à droite ...  */
-    margin: 20px 20px; /* 40 en haut et en bas, 20 à gauche et à droite */
-    margin: 2%;/* 10px partout autour de ma boîte */
-    background-color: #ccc;
-    /* Explication sur les propriétés de dimension */
-    width: 96%;
-    box-sizing: border-box;
-}
-
-/* Sélecteur par id. Le "#" en css correpond à id en html */
-#col-1 {
-    border-color: red;
-}
-#col-2 {
-    border-color: violet;
-}
-#col-3 {
-    border-color: blueviolet;
-}
-#col-4 {
-    border-color: green;
-}
 /* Menu */
 /* container flex */
 .flex-center {
@@ -75,5 +45,57 @@
     z-index: -1000;
 }
 /* Mise en page des colonnes */
+main {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+/* Selecteur par class. Le "." en css correspond à class en html */
+.col {
+    /* Largeur de chaque colonne */
+    width: 24%;
+}
 
-
+/* Mise en page du titre de chaque colonne */
+.col > header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.col > header h2 {
+    font-family: arial;
+    font-size: 1.5em;
+}
+.col > header > button {
+    margin-right: 20px;
+    background-color: #28a745 ;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    padding: 0 0.3rem;
+}
+/* Mise en page des cartes */
+.col article {
+    background-color: #6C757D;
+    color: white;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+/* Media queries pour faire en sorte que les colonnes fassent toute
+la largeur (ou presque) de l'écran s'il est petit (< 768px) */
+@media screen and (max-width: 768px) {
+    
+    main {
+        width: 95vw;
+        min-width: 95vw;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    main .col {
+        width: 100vw;
+        min-width: 93vw;
+    }
+    
+}
