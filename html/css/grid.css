@@ -1,16 +1,30 @@
+/* Permet de s'assurer qu'une image n'est pas plus 
+grande que son container */
 img {
     max-width: 100%;
 }
 .container {
     width: 80%;
+    /* Fixe la hauteur à 100% de l'écran */
     height: 100vh;
+    /* Divise en deux l'espace restant à droite et à gauche */
     margin: 0 auto;
+    /* La grille */
     display: grid;
+
     /* grid-template-columns: 33.33% 33.33% 33.33%; */
-    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* Définition du nombre et de la taille de chaque colonne */
+    grid-template-columns: repeat(3, 1fr);
+
+    /* Définition du nombre et de la taille de chaque ligne */
     grid-template-rows: 30% auto;
-    grid-column-gap: 1.04%;/*10/960= */
-    grid-row-gap: 20px;/*10/960= */
+
+    /* Définition des gouttières */
+    grid-column-gap: 1.04%;/*(10/960) * 100 = */
+    grid-row-gap: 20px;
+
+    /* Alignement des items sur l'axe horizontal et vertical */
     justify-items: stretch; /* Etirement le long de l'axe horizontal */
     align-items: stretch; /* Etirement le long de l'axe vertical */
 }

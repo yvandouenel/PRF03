@@ -18,8 +18,9 @@
   .container {
     height: 100vh;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 20% 60% 20%;
+    grid-gap: 1% 10px;
 
     grid-template-areas: "header header header header"
                          "main main main sidebar"
