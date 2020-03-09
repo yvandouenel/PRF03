@@ -1,0 +1,21 @@
+img {
+    max-width: 100%;
+}
+.container {
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    /* grid-template-columns: 33.33% 33.33% 33.33%; */
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 30% auto;
+    grid-column-gap: 1.04%;/*10/960= */
+    grid-row-gap: 20px;/*10/960= */
+    justify-items: stretch; /* Etirement le long de l'axe horizontal */
+    align-items: stretch; /* Etirement le long de l'axe vertical */
+}
+.container > * {
+    background-color: gray;
+    color: white;
+    border: 1px solid black;
+}

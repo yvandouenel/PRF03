@@ -1,0 +1,79 @@
+body {
+    background-color : green;
+  }
+/* Selecteur par class. Le "." en css correspond à class en html */
+.col {
+    /* Les 3 propriétés de block */
+    border: 5px solid black;
+    border-radius: 0;
+    padding: 2%;
+    
+    margin: 40px 30px 20px 10px;/* 40 en haut, 30 à droite ...  */
+    margin: 20px 20px; /* 40 en haut et en bas, 20 à gauche et à droite */
+    margin: 2%;/* 10px partout autour de ma boîte */
+    background-color: #ccc;
+    /* Explication sur les propriétés de dimension */
+    width: 96%;
+    box-sizing: border-box;
+}
+
+/* Sélecteur par id. Le "#" en css correpond à id en html */
+#col-1 {
+    border-color: red;
+}
+#col-2 {
+    border-color: violet;
+}
+#col-3 {
+    border-color: blueviolet;
+}
+#col-4 {
+    border-color: green;
+}
+/* Menu */
+/* container flex */
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+/* Eléments enfant du container flex */
+.flex-center button {
+    margin: 0 1%; 
+    background-color: #6c757d;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px;
+}
+.flex-center button:hover {
+    background-color: #EEE;
+    color: #6c757d;
+    cursor: pointer;
+}
+/* logo */
+#logo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background-color: #6c757d;
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+#logo span {
+    font-size: 3em;
+    font-family: arial;
+}
+/* Général */
+.hidden {
+    clip: rect(1px,1px,1px,1px);
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    z-index: -1000;
+}
+
