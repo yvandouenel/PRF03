@@ -88,14 +88,17 @@ la largeur (ou presque) de l'écran s'il est petit (< 768px) */
 @media screen and (max-width: 768px) {
     
     main {
-        width: 95vw;
-        min-width: 95vw;
+        width: 100vw;
+        min-width: 100vw;
         overflow-x: auto;
         overflow-y: hidden;
+        justify-content: flex-start;
     }
     main .col {
-        width: 100vw;
-        min-width: 93vw;
+        width: 98vw;
+        min-width: 98vw;
+        margin: 0 1vw;
+        
     }
     
 }
