@@ -90,15 +90,14 @@ la largeur (ou presque) de l'écran s'il est petit (< 768px) */
     main {
         width: 100vw;
         min-width: 100vw;
-        overflow-x: auto;
+        overflow-x: scroll;
         overflow-y: hidden;
         justify-content: flex-start;
     }
     main .col {
         width: 98vw;
         min-width: 98vw;
-        margin: 0 1vw;
-        
+        margin: 0 1vw; 
     }
     
 }
