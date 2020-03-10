@@ -1,0 +1,105 @@
+
+/* Menu */
+/* Bouton des thématiques - container flex  */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  button {
+    margin: 0 1%;
+    background-color: $memo-grey;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px;
+    &:hover {
+      background-color: #eee;
+      color: $memo-grey;
+      cursor: pointer;
+    }
+  }
+}
+/* logo */
+#logo {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  background-color: $memo-grey;
+  color: white;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  span {
+    font-size: 3em;
+    font-family: arial;
+  }
+}
+/* Général */
+.hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  z-index: -1000;
+}
+/* Mise en page des colonnes */
+main {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  /* Selecteur par class. Le "." en css correspond à class en html */
+  .col {
+    /* Largeur de chaque colonne */
+    width: 24%;
+    > header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      h2 {
+        font-family: arial;
+        font-size: 1.5em;
+      }
+      > button {
+        margin-right: 20px;
+        background-color: #28a745;
+        color: white;
+        border: 0;
+        border-radius: 4px;
+        font-size: 1.6rem;
+        padding: 0 0.3rem;
+      }
+    }
+    /* Mise en page des cartes */
+    article {
+      background-color: $memo-grey;
+      color: white;
+      padding: 10px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+  }
+  /* Dans le cas où l'écran est petit, chaque colonne
+  prend la largeur de l'écran (100vw). L'astuce est d'utiliser
+  overflow-x et de ne pas oublier de donner comme valeur à la 
+  propriété justify-content: flex-start */
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    min-width: 100vw;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    justify-content: flex-start;
+
+    .col {
+      width: 98vw;
+      min-width: 98vw;
+      margin: 0 1vw;
+    }
+  }
+}
+
+/* Mise en page du titre de chaque colonne */
+
+/* Media queries pour faire en sorte que les colonnes fassent toute
+la largeur (ou presque) de l'écran s'il est petit (< 768px) */
