@@ -41,7 +41,7 @@ fi
 
 # Créer un dossier pour le projet avec la configuration Drupal basique
   sudo composer create-project drupal-composer/drupal-project:8.x-dev $project --no-interaction
-  cd /home/$username  /dev/$project
+  cd /home/$username/dev/$project
   sudo vendor/drush/drush/drush si standard --db-url=mysql://$username:$password@localhost/$project
 # Modification des droits sur le dossier drupal
 sudo chown -R $username:www-data /home/$username/dev/$project
@@ -77,7 +77,7 @@ sudo service apache2 restart
 sudo sh -c "cat >> /etc/hosts <<END
 127.0.0.1       local.$project.my
 END"
-echo "Fichier /etc/apache2/sites-available/${project}.conf écrit." 
+echo "Fichier /etc/apache2/sites-available/${project}.conf écrit."
 echo "Si drush ne fonctionne pas, faites un lien symbolique:"
 echo "sudo ln -s /home/$username/dev/$project/vendor/drush/drush/drush /usr/local/bin/drush"
 echo "	=> Visiter votre site web: http://local.$project.my/"
