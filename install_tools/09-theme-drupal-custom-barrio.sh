@@ -7,27 +7,27 @@ read -p "Voulez vous installer Bootstrap barrio ? (y/n) " bootstrap_install
 if [[ "$bootstrap_install" =~ ^[yY]$ || "$bootstrap_install" =~ ^[yY][eE][sS]$ ]]
 then
   # If contrib/ doesn't exist, make it, then install the Bootstrap barrio theme.
-  if [ ! -d /var/www/$site_name/web/themes/contrib/ ]
+  if [ ! -d /home/$LOGNAME/dev/$site_name/web/themes/contrib/ ]
   then
-    mkdir /var/www/$site_name/web/themes/contrib/
-    cd /var/www/$site_name/web/themes/contrib/
+    mkdir /home/$LOGNAME/dev/$site_name/web/themes/contrib/
+    cd /home/$LOGNAME/dev/$site_name/web/themes/contrib/
     sudo composer require drupal/bootstrap_barrio
   # If Boostrap barrio theme doesn't exist, install it.
-  elif [ ! -d /var/www/$site_name/web/themes/contrib/bootstrap_barrio/ ]
+  elif [ ! -d /home/$LOGNAME/dev/$site_name/web/themes/contrib/bootstrap_barrio/ ]
   then
-    cd /var/www/$site_name/web/themes/contrib/
+    cd /home/$LOGNAME/dev/$site_name/web/themes/contrib/
     sudo composer require drupal/bootstrap_barrio
   fi
 fi
 
 # If custom/ doesn't exist, make it and go in.
-if [ ! -d /var/www/$site_name/web/themes/custom/ ]
+if [ ! -d /home/$LOGNAME/dev/$site_name/web/themes/custom/ ]
 then
-  mkdir /var/www/$site_name/web/themes/custom/
-  cd /var/www/$site_name/web/themes/custom/
+  mkdir /home/$LOGNAME/dev/$site_name/web/themes/custom/
+  cd /home/$LOGNAME/dev/$site_name/web/themes/custom/
 # Else go in custom/
 else
-  cd /var/www/$site_name/web/themes/custom/
+  cd /home/$LOGNAME/dev/$site_name/web/themes/custom/
 fi
 
 	## Rename the Bootstrap barrio files name
@@ -44,7 +44,7 @@ then
 fi
 
 # Téléchargement de bootstrap
-cd /var/www/$site_name/web/themes/custom/$site_name
+cd /home/$LOGNAME/dev/$site_name/web/themes/custom/$site_name
 git clone https://github.com/twbs/bootstrap.git
 
 
@@ -63,8 +63,8 @@ END
 
 cp scss/bootstrap/bootstrap.scss scss/bootstrap-overrides.scss
 # donner les bons droits sur le theme
-sudo chown -R $USER:www-data /var/www/$site_name/web/themes/custom/$site_name
-sudo chmod -R 775 /var/www/$site_name/web/themes/custom/$site_name
+sudo chown -R $USER:$USER /home/$LOGNAME/dev/$site_name/web/themes/custom/$site_name
+sudo chmod -R 775 /home/$LOGNAME/dev/$site_name/web/themes/custom/$site_name
 
 sed -i 's/@import "/@import "bootstrap\//g' scss/bootstrap-overrides.scss
 sed -i 's/\/\/stackpath.bootstrapcdn.com\/bootstrap\/4.1.1\/css\/bootstrap.min.css/css\/bootstrap.css/g' $site_name.libraries.yml
@@ -73,6 +73,6 @@ sed -i '5d;6d;7d;8d' ./$site_name.libraries.yml
 
 
 # Supprimer le code bootstrap qui ne sert plus
-rm -r /var/www/$site_name/web/themes/custom/$site_name/bootstrap
-echo -e "\033[0;37m Renomer le theme dans  $site_name.info.yml. \n Cela permettra de mieux le voir dans l'interface d'admin de drupal\n  Pour compiler cd /var/www/$site_name/web/themes/custom/$site_name puis sass scss/main.scss:css/bootstrap.css --watch \n  \nEn cas d'erreur de compilation cf http://monbootstrap.fr/resoudre-lerreur-de-compilation-_root-scss/ \033[0m"
+rm -r /home/$LOGNAME/dev/$site_name/web/themes/custom/$site_name/bootstrap
+echo -e "\033[0;37m Renomer le theme dans  $site_name.info.yml. \n Cela permettra de mieux le voir dans l'interface d'admin de drupal\n  Pour compiler cd /home/$LOGNAME/dev/$site_name/web/themes/custom/$site_name puis sass scss/main.scss:css/bootstrap.css --watch \n  \nEn cas d'erreur de compilation cf http://monbootstrap.fr/resoudre-lerreur-de-compilation-_root-scss/ \033[0m"
 
