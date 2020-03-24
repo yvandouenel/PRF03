@@ -27,7 +27,7 @@
 
         // Dans le cas où l'internaute entre un input qui n'est pas un nombre
         // écrire en dessous du formulaire un averstissement qui demande à entrer
-        // un nombre
+        // un nombre    
 
     }
     // Gestion des événements focus sur le champ euro
