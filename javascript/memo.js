@@ -1,4 +1,4 @@
-// je m'assure que le DOM est bien chargé
+// je m'assure que le DOM est bien chargé. "onload" signifie après chargement
 window.onload = function() {
     console.log("dans le script memo.js");
 
@@ -8,27 +8,62 @@ window.onload = function() {
             this.question = question;
             this.answer = answer;
 
+            // création de l'élément du dom de la carte
+            this.card_article_elt = document.createElement("article");
+            
+            // création de l'élément du dom correspondant au bouton supprimer
+            this.card_delete_elt = this.createElementWithText("button", "Supprimer");
+
             // appel de la méthode dessinerCarte()
             this.dessinerCarte();
+
+            // On relie le gestionnaire d'événement à l'objet carte
+            // car par défaut il est lié à l'objet (ici le bouton supprimer)
+            // qui l'appelle
+            this.supprimerCarte = this.supprimerCarte.bind(this);
+            
+            // gestion de l'événement click sur le bouton supprimer
+            this.card_delete_elt.onclick = this.supprimerCarte;// pas de parenthèse car asynchrone
         }
         // Méthode qui dessine la carte
         dessinerCarte() {
             console.log("dans dessinerCarte");
+            console.log("this.card_article_elt : ", this.card_article_elt);
 
-            // création des éléments du dom
-            const card_article_elt = document.createElement("article");
 
-            const card_question_elt = document.createElement("h2");
-            card_question_elt.textContent = this.question;
-
-            const card_answer_elt = document.createElement("p");
-            card_answer_elt.textContent = this.answer;
-
+            // création des éléments du dom de chaque carte ()
+            const card_question_elt = this.createElementWithText("h2", this.question);
+            const card_answer_elt = this.createElementWithText("p", this.answer);
+            
             // Ajout dans le dom les éléments nouvellement créés
-            card_article_elt.appendChild(card_question_elt);
-            card_article_elt.appendChild(card_answer_elt);
-            this.cards_elt.appendChild(card_article_elt);
-
+            this.card_article_elt.appendChild(card_question_elt);
+            this.card_article_elt.appendChild(card_answer_elt);
+            this.card_article_elt.appendChild(this.card_delete_elt);
+            this.cards_elt.appendChild(this.card_article_elt);
+        }
+        /**
+         * Suppression de l'élément du dom card_article_elt
+         * Attention par défaut comme supprimerCarte est appelé 
+         * par le bouton supprimer, il devient 
+         * @param {*} event 
+         */
+        supprimerCarte(event) {
+            console.log("Dans supprimerCarte");
+            console.log("this : ", this);
+            // supprimer l'élément carte du dom  (removeChild)
+            this.card_article_elt.parentNode.removeChild(this.card_article_elt);
+        }
+         /**
+         * Méthode pour créer une élément du DOM et lui ajouter du texte
+         * @param {string} markup 
+         * @param {string} txt 
+         */
+        createElementWithText(markup, txt) {
+            // création de l'élément du dom
+            const elt = document.createElement(markup);
+            // ajout du texte à l'élément du DOM fraîchement créé
+            elt.textContent = txt;
+            return elt;
         }
     }
     // Ajout au prototype du constructeur Card l'élément
