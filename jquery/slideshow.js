@@ -37,6 +37,9 @@ jQuery(function ($) {
                 // du div d'id diapo
                 $("#diapo img:first").appendTo("#diapo");
 
+                // on récupère l'index du bouton qui a la classe "selected", on lui enlève selected
+                // et on ajoute la class selected au bouton suivant
+
                 // appel récursif (toutes les 3 secondes)
                 nextSlide();
             }
