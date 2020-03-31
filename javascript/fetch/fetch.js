@@ -1,5 +1,3 @@
-console.log("Dans fetch.js");
-
 fetch("http://www.coopernet.fr/rest/session/token/")
   .then(function(response) {
     if (response.status !== 200) { // si ça c'est mal passé
