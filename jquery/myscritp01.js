@@ -4,7 +4,7 @@
 //  - Attend que le dom soit chargé
 //  - S'assure que $ est bien un alias de jQuery
 
-jQuery(function($) {
+jQuery(function ($) {
     console.log("jQuery chargé");
 
     // Deuxième utilisation de jQuery (alias $)
@@ -26,8 +26,50 @@ jQuery(function($) {
     // Exemple de getter : méthode text() utilisé sans argument
     console.log("Contenu textuel de p1 : ", p1.text()); // va afficher dans la console paragraphe 2
     console.log("Contenu textuel de p2 : ", p2_text); // va afficher dans la console paragraphe 2
-    
+
     // Exemple de setter : méthode text("test") utilisé avec un argument
     p2.text("Texte qui vient remplacer l'ancien texte de p2");
+
+    // Exemple de getter : val()
+    let value_hello = $("#hello").val();
+    console.log(value_hello);
+
+    // Exemple de setter : val("Salut")
+    $("#hello").val("Salut");
+
+    // exemple de setter css({json})
+    p2.css({
+        "background-color": "yellow",
+        "font-weight": "bold",
+        "padding": "10px"
+    });
+
+    // exemple de setter sur plusieurs éléments
+    $("ul > li").css({
+        "background-color": "grey",
+        "font-weight": "bold",
+        "padding": "10px",
+        "list-style": "none"
+    });
+
+    // Parcours des éléments du dom qui correspondent au sélecteur (ici ul > li)
+    $("ul > li").each(function (index) {
+        console.log("index : ", index);
+        
+        // on peut retrouver chaque élément du dom augmenté avec $(this)
+        if (index == 2) $("<li>avant le 3ième élément</li>")
+        .insertBefore($(this))
+        .on("click", function () {
+            console.log($(this).text());
+        });
+        
+        // on ajoute un gestionaire d'événement pour chaque élément de la liste
+        $(this).on("click", function () {
+            console.log($(this).text());
+        });
+
+    });
+
+
 
 });
