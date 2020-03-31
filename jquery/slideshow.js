@@ -2,10 +2,21 @@ jQuery(function ($) {
     // variable boolean qui permet de savoir si le slideshow tourne ou s'il est arrêté 
     let is_running = false;
 
+    // Création des boutons qui indiquent le nombre d'images et la quelle
+    // est actuellement visible
+    let nb_img = $("#diapo > img").length;
+    console.log("nbre d'images : ", nb_img);
+
+    for(let i = 0; i < nb_img; i++) {
+        let selected = (i) ? "not-selected" : "selected"
+        $('<button class=" ' + selected + '">' +  (i + 1) + "</button>").appendTo("#controls");
+    }
+
+
     // création du bouton go et ajout après l'élément d'id diapo puis ajout du gestion d'événement
     // click qui appellera la fonction nextSlide
     const go_button = $("<button>Go</button>")
-        .insertAfter("#diapo")
+        .prependTo("#controls")
         .on("click", function () {
             // dans le cas où le slideshow était arrêté, on le démare 
             if (!is_running) {

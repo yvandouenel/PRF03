@@ -6,3 +6,11 @@ img {
     height: 169px;
     overflow: hidden;
 }
+.not-selected {
+    background-color: grey;
+    color: white;
+}
+.selected {
+    color: black;
+    background-color: white;
+}
