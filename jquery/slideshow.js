@@ -7,9 +7,9 @@ jQuery(function ($) {
     let nb_img = $("#diapo > img").length;
     console.log("nbre d'images : ", nb_img);
 
-    for(let i = 0; i < nb_img; i++) {
+    for (let i = 0; i < nb_img; i++) {
         let selected = (i) ? "not-selected" : "selected"
-        $('<button class=" ' + selected + '">' +  (i + 1) + "</button>").appendTo("#controls");
+        $('<button class="btn-number ' + selected + '">' + (i + 1) + "</button>").appendTo("#controls");
     }
 
 
@@ -40,6 +40,22 @@ jQuery(function ($) {
                 // on récupère l'index du bouton qui a la classe "selected", on lui enlève selected
                 // et on ajoute la class selected au bouton suivant
 
+                // on va chercher le bouton qui appartient à la classe "selected"
+                let button_selected = $(".selected"); 
+
+                 // on récupère l'index du bouton  qui appartient à la classe "selected"
+                let selected_index = $(".btn-number").index(button_selected);
+                console.log("index du bouton selected", selected_index);
+
+                // Calculer l'index du bouton suivant le bouton "selected" à l'aide de l'opérateur "modulo"
+                next_index = (selected_index + 1) % 3;
+                console.log("index du bouton suivant", next_index);
+
+                $(".btn-number").each(function(index) {
+                    if(index == selected_index) $(this).removeClass("selected").addClass("not-selected");
+                    if(index == next_index) $(this).removeClass("not-selected").addClass("selected");
+                });
+
                 // appel récursif (toutes les 3 secondes)
                 nextSlide();
             }
@@ -48,3 +64,8 @@ jQuery(function ($) {
     }
 
 });
+
+// Autre façon de faire Associer un objet du dom à un autre objet du dom via un tableau
+[
+    [{//ojet du dom imgage}, {//objet du dom bouton}]
+]
