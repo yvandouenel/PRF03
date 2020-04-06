@@ -6,14 +6,37 @@ import Term from './Term';
 class Table extends Component {
     state = {
         terms: [
-            { id: 1, name: "css" },
-            { id: 2, name: "html" },
-            { id: 3, name: "bootstrap" },
-            { id: 4, name: "js" },
-            { id: 5, name: "jQuery" },
-            { id: 6, name: "react" }
+            { id: 1, name: "css", selected: false },
+            { id: 2, name: "html", selected: false },
+            { id: 3, name: "bootstrap", selected: false },
+            { id: 4, name: "js", selected: false },
+            { id: 5, name: "jQuery", selected: false },
+            { id: 6, name: "react", selected: false }
         ],
         adding_a_term: false
+    }
+    /**
+    * Gestionnaire d'événement click
+    * le premier paramètre est par convention l'objet event
+    */
+    handleClickTerm = (event, term) => {
+        console.log('Dans handleClickTerm de Table');
+        console.log('Term cliqué : ', term);
+        // changement du state via setState
+        const state_local = { ... this.state };
+
+        // récupération de l'index de l'objet cliqué dans le state local
+        const term_index = state_local.terms.indexOf(term);
+        console.log('index du Term cliqué : ', term_index);
+
+        // changement de valeur du state local
+        state_local.terms.forEach((element) => { element.selected = false })
+        state_local.terms[term_index].selected = true;
+
+        this.setState(state_local);
+
+        //console.log("state", this.state);
+
     }
     /**
      * Gestionnaire d'événement click
@@ -81,7 +104,8 @@ class Table extends Component {
                     </h1>
                     <nav className="d-flex justify-content-center">
                         <button onClick={e => { this.handleClickAddTerm(e) }} className="btn btn-danger"> + </button>
-                        {this.state.terms.map(term => <Term key={term.id} name={term.name} />)}
+                        {this.state.terms.map(term =>
+                            <Term onClickTerm={this.handleClickTerm} key={term.id} term={term} />)}
                     </nav>
                     {this.dumpFormAddTerm()}
                 </header>
