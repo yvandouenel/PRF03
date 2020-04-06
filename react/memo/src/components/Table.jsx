@@ -44,15 +44,18 @@ class Table extends Component {
         // Suppression du comportement par défaut des formulaires qui rechargent la page à la soumission
         event.preventDefault();
 
+        // récupération de la donnée entrée dans le champ term-input
+        const term_input = document.getElementById(term - input).value;
+
     }
     dumpFormAddTerm = () => {
         console.log('Dans dumpFormAddTerm');
         if (this.state.adding_a_term == true) {
             return (
-                <form onSubmit={e => { this.handleSubmitTerm(e) }}>
+                <form onSubmit={event => { this.handleSubmitTerm(event); }}>
                     <label>
                         Terme :
-                    <input type="text" />
+                    <input type="text" id="term-input" />
                     </label>
                     <input type="submit" value="Envoyer" />
                 </form>
