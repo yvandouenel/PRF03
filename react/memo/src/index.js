@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import d'un composant (component)
-import Card from './components/Card';
-
+import Table from './components/Table';
+/* console.log('!'); */
 ReactDOM.render(
   <React.StrictMode>
-    {/*équivalent de new Card("Question", "Réponse")*/}
-    <Card question="Question" answer="Réponse" explanation="Explication" />
+    {/*équivalent de new Table()*/}
+    <Table />
   </React.StrictMode>,
   document.getElementById('root')
 );
