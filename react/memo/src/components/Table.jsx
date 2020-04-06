@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from './Card';
+import Term from './Term';
 
 
 class Table extends Component {
@@ -80,7 +81,7 @@ class Table extends Component {
                     </h1>
                     <nav className="d-flex justify-content-center">
                         <button onClick={e => { this.handleClickAddTerm(e) }} className="btn btn-danger"> + </button>
-                        {this.state.terms.map(term => <button className="btn btn-warning  ml-2 mr-2" key={term.id}> {term.name} </button>)}
+                        {this.state.terms.map(term => <Term key={term.id} name={term.name} />)}
                     </nav>
                     {this.dumpFormAddTerm()}
                 </header>
