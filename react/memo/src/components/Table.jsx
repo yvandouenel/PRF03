@@ -45,8 +45,14 @@ class Table extends Component {
         event.preventDefault();
 
         // récupération de la donnée entrée dans le champ term-input
-        const term_input = document.getElementById(term - input).value;
+        const term_input = document.getElementById("term-input").value;
+        console.log('input term : ', term_input);
 
+        // copie du state
+        const state_local = { ... this.state };
+        state_local.terms.push({ id: state_local.terms.length + 1, name: term_input });
+
+        this.setState(state_local);
     }
     dumpFormAddTerm = () => {
         console.log('Dans dumpFormAddTerm');
