@@ -51,6 +51,7 @@ class Table extends Component {
         // copie du state
         const state_local = { ... this.state };
         state_local.terms.push({ id: state_local.terms.length + 1, name: term_input });
+        state_local.adding_a_term = false;
 
         this.setState(state_local);
     }
@@ -70,7 +71,7 @@ class Table extends Component {
     }
     render() {
         return (
-            <>
+            <div className="container">
                 <header>
                     <h1 className="d-flex justify-content-center">
                         <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512"
@@ -101,7 +102,7 @@ class Table extends Component {
                     </section>
                 </main>
                 <footer>Footer ici</footer>
-            </>
+            </div>
         );
     }
 }
