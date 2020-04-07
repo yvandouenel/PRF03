@@ -8,23 +8,34 @@ class Term extends Component {
             return "btn ml-2 mr-2 btn-success";
         } else return "btn ml-2 mr-2 btn-warning"; */
         // opérateur ternaire
-        const classes = "btn ml-2 mr-2 ";
         return ((this.props.term.selected)
-            ? classes + "btn-success"
-            : classes + "btn-warning");
+            ? "btn-success"
+            : "btn-warning");
     }
-    render() {
-        return (
+    dumpTermButtonOrForm = () => {
+        if (this.props.term.selected) {
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        <input type="text" value={this.props.term.name} onChange={this.handleChange} />
+                    </label>
+                    <input type="submit" value="Envoyer" />
+                </form>
+            );
+        } else return (
             <button
                 onClick={
                     e => {
                         this.props.onClickTerm(e, this.props.index);
                     }
                 }
-                className={this.dumpTermClass()}>
+                className={"btn ml-2 mr-2 btn-warning"}>
                 {this.props.term.name}
             </button>
         );
+    }
+    render() {
+        return (<>{this.dumpTermButtonOrForm()}</>);
     }
 }
 
