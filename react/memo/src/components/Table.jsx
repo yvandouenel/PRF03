@@ -9,8 +9,8 @@ class Table extends Component {
         terms: [
             { id: 56, name: "css", selected: false },
             { id: 89, name: "html", selected: false },
-            { id: 56, name: "bootstrap", selected: false },
-            { id: 89, name: "js", selected: false },
+            { id: 156, name: "bootstrap", selected: false },
+            { id: 189, name: "js", selected: false },
             { id: 7, name: "jQuery", selected: false },
             { id: 45, name: "react", selected: false }
         ],
