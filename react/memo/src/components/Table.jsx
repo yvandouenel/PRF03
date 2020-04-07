@@ -10,10 +10,10 @@ class Table extends Component {
     state = {
         // Tableau des colonnes
         columns: [
-            { id: 1, name: "A apprendre" },
-            { id: 2, name: "Je sais un peu" },
-            { id: 3, name: "Je sais bien" },
-            { id: 4, name: "Je sais parfaitement" }
+            { id: 1, name: "A apprendre", cards: [] },
+            { id: 2, name: "Je sais un peu", cards: [] },
+            { id: 3, name: "Je sais bien", cards: [] },
+            { id: 4, name: "Je sais parfaitement", cards: [] }
         ],
         // Tableau des termes (rubriques)
         terms: [
@@ -93,6 +93,20 @@ class Table extends Component {
         console.log('Dans handleSubmitAddCard');
         // Suppression du comportement par défaut des formulaires qui rechargent la page à la soumission
         event.preventDefault();
+
+        // Récupération de la question et de la réponse
+        const question = event.target.querySelector("#question-input").value;
+        const answer = event.target.querySelector("#answer-input").value;
+
+        console.log('question : ', question, 'réponse : ', answer);
+
+        const state_local = { ... this.state };
+        // Ajout dans le state local de ma carte
+        state_local
+            .columns[state_local.index_column_adding_a_card]
+            .cards.push({ "id": 1, "question": question, "answer": answer });
+
+        this.setState(state_local);
 
     }
     /**

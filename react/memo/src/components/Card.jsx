@@ -28,11 +28,7 @@ class Card extends Component {
     render() {
         return (
             <>
-                <button
-                    onClick={e => { this.handleClick(e) }}>
-                    Changer le dom virtuel (state)
-                </button>
-                <h1>{this.state.question}</h1>
+                <h3>{this.state.question}</h3>
                 <p>{this.state.answer}</p>
             </>
         );
