@@ -15,9 +15,16 @@ class Term extends Component {
     dumpTermButtonOrForm = () => {
         if (this.props.term.selected) {
             return (
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={e => {
+                    this.props.onSubmitEditTerm(
+                        e,
+                        this.props.index)
+                }}
+                >
                     <label>
-                        <input type="text" value={this.props.term.name} onChange={this.handleChange} />
+                        <input type="text"
+                            defaultValue={this.props.term.name}
+                        />
                     </label>
                     <input type="submit" value="Envoyer" />
                 </form>

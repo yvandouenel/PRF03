@@ -58,7 +58,33 @@ class Table extends Component {
         this.setState(state_local);
     }
     /**
-     * Gestionnaire de l'événement "submit" du formulaire
+     * Gestionnaire de l'événement "submit" du formulaire de modification
+     * le premier paramètre est par convention l'objet event
+     */
+    handleSubmitEditTerm = (event, index) => {
+        console.log('Dans handleSubmitEditTerm');
+        // Suppression du comportement par défaut des formulaires qui rechargent la page à la soumission
+        event.preventDefault();
+        console.log(event.target);
+
+        // Récupération de la valeur comprise dans l'input du formulaire
+        // qui est à l'origine de l'événement grâce à querySelector
+        const term_input_value = event.target.querySelector("input").value;
+        console.log("term_input_value", term_input_value);
+
+        // copie du state
+        const state_local = { ... this.state };
+
+        // Modification du state local
+        state_local.terms[index].name = term_input_value;
+        state_local.terms[index].selected = false;
+
+        // Changement du state de table
+        this.setState(state_local);
+
+    }
+    /**
+     * Gestionnaire de l'événement "submit" du formulaire d'ajout
      * le premier paramètre est par convention l'objet event
      */
     handleSubmitTerm = (event) => {
@@ -108,6 +134,7 @@ class Table extends Component {
                                 key={term.id}
                                 term={term}
                                 index={index}
+                                onSubmitEditTerm={this.handleSubmitEditTerm}
                             />)}
                     </nav>
                     {this.dumpFormAddTerm()}
