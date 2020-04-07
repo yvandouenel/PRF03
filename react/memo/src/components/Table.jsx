@@ -80,6 +80,15 @@ class Table extends Component {
         // méthode "render" est à nouveau appelée
         this.setState(state_local);
     }
+    handleCloseModal = () => {
+        console.log('Dans handleCloseModal');
+        // copie du state
+        const state_local = { ... this.state };
+        state_local.adding_a_card = false;
+
+        this.setState(state_local);
+
+    }
     handleSubmitAddCard = (event) => {
         console.log('Dans handleSubmitAddCard');
         // Suppression du comportement par défaut des formulaires qui rechargent la page à la soumission
@@ -158,7 +167,7 @@ class Table extends Component {
     dumpModal = () => {
         if (this.state.adding_a_card) {
             return (
-                <Modal.Dialog>
+                <Modal show={this.state.adding_a_card} onHide={this.handleCloseModal}>
                     <Modal.Header closeButton>
                         <Modal.Title>Modal title</Modal.Title>
                     </Modal.Header>
@@ -177,10 +186,10 @@ class Table extends Component {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button variant="secondary">Close</Button>
+                        <Button onClick={this.handleCloseModal} variant="secondary">Close</Button>
                         <Button variant="primary">Save changes</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             );
         }
 
