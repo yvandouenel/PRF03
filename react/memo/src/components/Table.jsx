@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import Card from './Card';
 import Term from './Term';
+import Column from './Column';
 
 
 class Table extends Component {
     state = {
+        // Tableau des colonnes
+        columns: [
+            { id: 1, name: "A apprendre" },
+            { id: 2, name: "Je sais un peu" },
+            { id: 3, name: "Je sais bien" },
+            { id: 4, name: "Je sais parfaitement" }
+        ],
         // Tableau des termes (rubriques)
         terms: [
             { id: 56, name: "css", selected: false },
@@ -79,6 +87,9 @@ class Table extends Component {
         state_local.terms[index].name = term_input_value;
         state_local.terms[index].selected = false;
 
+        // on supprime le terme si la valeur du champ est vide
+        if (!term_input_value) state_local.terms.splice(index, 1);
+
         // Changement du state de table
         this.setState(state_local);
 
@@ -142,17 +153,10 @@ class Table extends Component {
                 <main>
                     {/* Les 4 colonnes */}
                     <section className="row">
-                        {/* Colonne 1 */}
-                        <section>
-                            <Card question="Question" answer="Réponse" explanation="Explication" />
-
-                        </section>
-                        {/* Colonne 2 */}
-                        <section></section>
-                        {/* Colonne 3 */}
-                        <section></section>
-                        {/* Colonne 4 */}
-                        <section></section>
+                        {this.state.columns.map(
+                            (column, index) =>
+                                <Column key={column.id} column={column} index={index} />
+                        )}
 
                     </section>
                 </main>
