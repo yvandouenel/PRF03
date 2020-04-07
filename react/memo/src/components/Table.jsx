@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Card from './Card';
 import Term from './Term';
 import Column from './Column';
 import Modal from 'react-bootstrap/Modal';
@@ -7,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 
 class Table extends Component {
+
     state = {
         // Tableau des colonnes
         columns: [
@@ -25,8 +25,11 @@ class Table extends Component {
             { id: 45, name: "react", selected: false }
         ],
         adding_a_term: false,
-        index_column_adding_a_card: -1
+        index_column_adding_a_card: -1,
     }
+
+
+
     /**
     * Gestionnaire d'événement click
     * le premier paramètre est par convention l'objet event
@@ -35,7 +38,7 @@ class Table extends Component {
         console.log('Dans handleClickTerm de Table');
         console.log('Index du Term cliqué : ', term_index);
         // changement du state via setState
-        const state_local = { ... this.state };
+        const state_local = { ...this.state };
 
         // récupération de l'index de l'objet cliqué dans le state local
         console.log('index du Term cliqué : ', term_index);
