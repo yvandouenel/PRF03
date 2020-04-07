@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Card from './Card';
 import Term from './Term';
 import Column from './Column';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 
 class Table extends Component {
@@ -15,14 +17,15 @@ class Table extends Component {
         ],
         // Tableau des termes (rubriques)
         terms: [
-            { id: 56, name: "css", selected: false },
+            { id: 56, name: "css", selected: true },
             { id: 89, name: "html", selected: false },
             { id: 156, name: "bootstrap", selected: false },
             { id: 189, name: "js", selected: false },
             { id: 7, name: "jQuery", selected: false },
             { id: 45, name: "react", selected: false }
         ],
-        adding_a_term: false
+        adding_a_term: false,
+        adding_a_card: false
     }
     /**
     * Gestionnaire d'événement click
@@ -45,6 +48,18 @@ class Table extends Component {
 
     }
     /**
+     * Gestionnaire d'événement click pour la création d'une carte
+     * le premier paramètre est par convention l'objet event
+     */
+    handleClickAddCard = (event) => {
+        console.log('Dans handleClickAddCard');
+
+        const state_local = { ...this.state };
+        state_local.adding_a_card = true;
+
+        this.setState(state_local)
+    }
+    /**
      * Gestionnaire d'événement click
      * le premier paramètre est par convention l'objet event
      */
@@ -64,6 +79,12 @@ class Table extends Component {
         // s'il y a une différence entre les deux objets, le state est modfié et la 
         // méthode "render" est à nouveau appelée
         this.setState(state_local);
+    }
+    handleSubmitAddCard = (event) => {
+        console.log('Dans handleSubmitAddCard');
+        // Suppression du comportement par défaut des formulaires qui rechargent la page à la soumission
+        event.preventDefault();
+
     }
     /**
      * Gestionnaire de l'événement "submit" du formulaire de modification
@@ -114,6 +135,9 @@ class Table extends Component {
 
         this.setState(state_local);
     }
+    /**
+     * Affichage du formulaire des termes
+     */
     dumpFormAddTerm = () => {
         console.log('Dans dumpFormAddTerm');
         if (this.state.adding_a_term == true) {
@@ -128,6 +152,40 @@ class Table extends Component {
             );
         }
     }
+    /**
+     * Affichage d'un modal pour ajouter une carte (card)
+     */
+    dumpModal = () => {
+        if (this.state.adding_a_card) {
+            return (
+                <Modal.Dialog>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal title</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <form onSubmit={event => { this.handleSubmitAddCard(event); }}>
+                            <label>
+                                Question :
+                                <input className="m-1 " type="text" id="question-input" />
+                                <br></br>
+                                Réponse :
+                                <input className="m-1" type="text" id="answer-input" />
+                            </label>
+                            <input type="submit" value="Envoyer" />
+                        </form>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary">Close</Button>
+                        <Button variant="primary">Save changes</Button>
+                    </Modal.Footer>
+                </Modal.Dialog>
+            );
+        }
+
+    }
+
     render() {
         return (
             <div className="container">
@@ -146,6 +204,7 @@ class Table extends Component {
                                 term={term}
                                 index={index}
                                 onSubmitEditTerm={this.handleSubmitEditTerm}
+
                             />)}
                     </nav>
                     {this.dumpFormAddTerm()}
@@ -155,12 +214,21 @@ class Table extends Component {
                     <section className="row">
                         {this.state.columns.map(
                             (column, index) =>
-                                <Column key={column.id} column={column} index={index} />
+                                <Column
+                                    key={column.id}
+                                    column={column}
+                                    index={index}
+                                    onClickAddCard={this.handleClickAddCard}
+                                />
                         )}
 
                     </section>
+                    {this.dumpModal()}
                 </main>
-                <footer>Footer ici</footer>
+                <footer>
+
+
+                </footer>
             </div>
         );
     }
