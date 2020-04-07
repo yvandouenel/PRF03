@@ -25,7 +25,7 @@ class Table extends Component {
             { id: 45, name: "react", selected: false }
         ],
         adding_a_term: false,
-        adding_a_card: false
+        index_column_adding_a_card: -1
     }
     /**
     * Gestionnaire d'événement click
@@ -51,11 +51,11 @@ class Table extends Component {
      * Gestionnaire d'événement click pour la création d'une carte
      * le premier paramètre est par convention l'objet event
      */
-    handleClickAddCard = (event) => {
+    handleClickAddCard = (event, column_index) => {
         console.log('Dans handleClickAddCard');
 
         const state_local = { ...this.state };
-        state_local.adding_a_card = true;
+        state_local.index_column_adding_a_card = column_index;
 
         this.setState(state_local)
     }
@@ -84,7 +84,7 @@ class Table extends Component {
         console.log('Dans handleCloseModal');
         // copie du state
         const state_local = { ... this.state };
-        state_local.adding_a_card = false;
+        state_local.index_column_adding_a_card = -1;
 
         this.setState(state_local);
 
@@ -165,11 +165,14 @@ class Table extends Component {
      * Affichage d'un modal pour ajouter une carte (card)
      */
     dumpModal = () => {
-        if (this.state.adding_a_card) {
+        const show = (this.state.index_column_adding_a_card == -1)
+            ? false
+            : true;
+        if (show) {
             return (
-                <Modal show={this.state.adding_a_card} onHide={this.handleCloseModal}>
+                <Modal show={show} onHide={this.handleCloseModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal title</Modal.Title>
+                        <Modal.Title>Ajout d'une carte</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
@@ -186,8 +189,8 @@ class Table extends Component {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button onClick={this.handleCloseModal} variant="secondary">Close</Button>
-                        <Button variant="primary">Save changes</Button>
+                        <Button onClick={this.handleCloseModal} variant="secondary">Fermer</Button>
+                        <Button variant="primary">Enregistrer</Button>
                     </Modal.Footer>
                 </Modal>
             );
