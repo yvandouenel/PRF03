@@ -102,6 +102,14 @@ class Connection {
             })
             .catch(error => { callbackFailed("Erreur dans getToken" + error.message); });
     };
+    /**
+     * Permet de modifier un terme
+     * label : nouveau nom
+     * tid : id du term
+     * callbackSucces : fonction à appeler en cas de succès
+     * callbackFailed : fonction à appeler en cas d'échec
+     * ptid : parent term id mais on n'en pas besoin pour l'instant (facultatif)
+     */
     editTerm = (
         label,
         tid,
