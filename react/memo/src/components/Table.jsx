@@ -11,12 +11,7 @@ class Table extends Component {
         super(props);
         this.state = {
             // Tableau des colonnes
-            columns: [
-                { id: 1, name: "A apprendre", cartes: [] },
-                { id: 2, name: "Je sais un peu", cartes: [] },
-                { id: 3, name: "Je sais bien", cartes: [] },
-                { id: 4, name: "Je sais parfaitement", cartes: [] }
-            ],
+            columns: [],
             // Tableau des termes (rubriques)
             terms: [],
             adding_a_term: false,
@@ -133,13 +128,20 @@ class Table extends Component {
 
         // copie du state
         const state_local = { ... this.state };
-
+        const term = state_local.terms[index];
         // Modification du state local
         state_local.terms[index].name = term_input_value;
         state_local.terms[index].selected = false;
 
         // on supprime le terme si la valeur du champ est vide
         if (!term_input_value) state_local.terms.splice(index, 1);
+
+        // on enregistre en bd
+        this.connection.editTerm(
+            term_input_value,
+            term.id,
+            this.successEditTerm,
+            this.failedEditTerm);
 
         // Changement du state de table
         this.setState(state_local);
@@ -226,6 +228,9 @@ class Table extends Component {
         this.connection.getTerms(this.successGetTerms, this.failedGetTerms);
 
     }
+    successEditTerm = (data) => {
+        console.log('dans successEditTerm');
+    }
     /**
      * Une fois que l'on a récupéré les colonnes et les cartes
      * qui correspondent au terme cliqué, il s'agit ici
@@ -248,6 +253,9 @@ class Table extends Component {
 
         this.setState(state_local);
 
+    }
+    failedEditTerm = (msg) => {
+        console.log('dans failedEditTerm : ', msg);
     }
     failedGetCards = (msg) => {
         console.log('dans failedGetCards : ', msg);
