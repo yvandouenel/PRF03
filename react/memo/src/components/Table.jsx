@@ -18,17 +18,11 @@ class Table extends Component {
                 { id: 4, name: "Je sais parfaitement", cards: [] }
             ],
             // Tableau des termes (rubriques)
-            terms: [
-                { id: 56, name: "css", selected: true },
-                { id: 89, name: "html", selected: false },
-                { id: 156, name: "bootstrap", selected: false },
-                { id: 189, name: "js", selected: false },
-                { id: 7, name: "jQuery", selected: false },
-                { id: 45, name: "react", selected: false }
-            ],
+            terms: [],
             adding_a_term: false,
             index_column_adding_a_card: -1,
         };
+        // instance de la classe Connection
         this.connection = new Connection();
         console.log('connection : ', this.connection);
     }
@@ -49,6 +43,13 @@ class Table extends Component {
         // changement de valeur du state local
         state_local.terms.forEach((element) => { element.selected = false })
         state_local.terms[term_index].selected = true;
+
+        // Récupération des cartes concernant le terme qui vient d'être cliqué
+        this.connection.getCards(
+            state_local.terms[term_index].id,
+            this.successGetCards,
+            this.failedGetCards
+        );
 
         this.setState(state_local);
 
@@ -222,17 +223,31 @@ class Table extends Component {
 
         // on va pouvoir aller chercher les termes puisqu'on est sûr 
         // d'avoir un token
-        this.connection.getTerms(this.succesGetTerms, this.failedGetTerms);
+        this.connection.getTerms(this.successGetTerms, this.failedGetTerms);
 
+    }
+
+    successGetCards = (data) => {
+        console.log('dans succesGetCards');
+
+    }
+    successGetTerms = (data) => {
+        console.log('dans successGetTerms');
+        // maintenant que l'on a les termes, il faut modifier le state
+        const state_local = { ... this.state };
+        state_local.terms = data;
+
+        this.setState(state_local);
+
+    }
+    failedGetCards = (msg) => {
+        console.log('dans failedGetCards : ', msg);
+    }
+    failedGetTerms = (msg) => {
+        console.log('dans successGetTerms : ', msg);
     }
     failedGetToken = (msg) => {
         console.log('dans failedGetToken', msg);
-    }
-    succesGetTerms = (data) => {
-        console.log('dans succesGetTerms');
-    }
-    failedGetTerms = (msg) => {
-        console.log('dans succesGetTerms : ', msg);
     }
 
     render() {
