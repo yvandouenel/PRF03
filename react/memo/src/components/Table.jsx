@@ -3,32 +3,35 @@ import Term from './Term';
 import Column from './Column';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-
+import Connection from '../services/Connection';
 
 class Table extends Component {
 
-    state = {
-        // Tableau des colonnes
-        columns: [
-            { id: 1, name: "A apprendre", cards: [] },
-            { id: 2, name: "Je sais un peu", cards: [] },
-            { id: 3, name: "Je sais bien", cards: [] },
-            { id: 4, name: "Je sais parfaitement", cards: [] }
-        ],
-        // Tableau des termes (rubriques)
-        terms: [
-            { id: 56, name: "css", selected: true },
-            { id: 89, name: "html", selected: false },
-            { id: 156, name: "bootstrap", selected: false },
-            { id: 189, name: "js", selected: false },
-            { id: 7, name: "jQuery", selected: false },
-            { id: 45, name: "react", selected: false }
-        ],
-        adding_a_term: false,
-        index_column_adding_a_card: -1,
+    constructor(props) {
+        super(props);
+        this.state = {
+            // Tableau des colonnes
+            columns: [
+                { id: 1, name: "A apprendre", cards: [] },
+                { id: 2, name: "Je sais un peu", cards: [] },
+                { id: 3, name: "Je sais bien", cards: [] },
+                { id: 4, name: "Je sais parfaitement", cards: [] }
+            ],
+            // Tableau des termes (rubriques)
+            terms: [
+                { id: 56, name: "css", selected: true },
+                { id: 89, name: "html", selected: false },
+                { id: 156, name: "bootstrap", selected: false },
+                { id: 189, name: "js", selected: false },
+                { id: 7, name: "jQuery", selected: false },
+                { id: 45, name: "react", selected: false }
+            ],
+            adding_a_term: false,
+            index_column_adding_a_card: -1,
+        };
+        this.connection = new Connection();
+        console.log('connection : ', this.connection);
     }
-
-
 
     /**
     * Gestionnaire d'événement click
@@ -214,6 +217,23 @@ class Table extends Component {
         }
 
     }
+    successGetToken = (data) => {
+        console.log('dans successGetToken');
+
+        // on va pouvoir aller chercher les termes puisqu'on est sûr 
+        // d'avoir un token
+        this.connection.getTerms(this.succesGetTerms, this.failedGetTerms);
+
+    }
+    failedGetToken = (msg) => {
+        console.log('dans failedGetToken', msg);
+    }
+    succesGetTerms = (data) => {
+        console.log('dans succesGetTerms');
+    }
+    failedGetTerms = (msg) => {
+        console.log('dans succesGetTerms : ', msg);
+    }
 
     render() {
         return (
@@ -260,6 +280,11 @@ class Table extends Component {
                 </footer>
             </div>
         );
+    }
+    componentDidMount() {
+        console.log('Dans componentDidMount');
+        // Récupération du token
+        this.connection.getToken(this.successGetToken, this.failedGetToken);
     }
 }
 

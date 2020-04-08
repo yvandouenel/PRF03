@@ -4,7 +4,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 // import d'un composant (component)
 import Table from './components/Table';
-/* console.log('!'); */
+
 ReactDOM.render(
   <React.StrictMode>
     {/*équivalent de new Table()*/}

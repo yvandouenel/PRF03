@@ -64,11 +64,17 @@ class Connection {
                     callbackSuccess(data);
                 } else {
                     throw new Error("Problème de data ", data);
-                    //callbackFailed("");
                 }
             })
-            .catch(error => { console.error("Erreur attrapée dans getTerms", error); });
+            .catch(error => {
+                console.error("Erreur attrapée dans getTerms", error);
+                callbackFailed(error.message);
+            });
     };
+    /**
+     * Va récupérer le token qui servira à chaque session 
+     * pour nous identifier auprès de Drupal
+     */
     getToken = (callbackSuccess, callbackFailed) => {
         console.log("Dans getToken de connection");
         fetch(this.url_server + "rest/session/token/", {
@@ -76,20 +82,25 @@ class Connection {
             method: "GET"
         })
             .then(response => {
+                // si le statut de la réponse est 200, c'est que du point de vue
+                // du serveur, tout s'est bien passé
+                // On teste avec la méthode text() si le serveur a bien renvoyé du texte
                 if (response.status === 200) return response.text();
                 else throw new Error("Problème de réponse ", response);
             })
             .then(data => {
                 console.log("data reçues dans getToken :", data);
+                // Vérification que la donnée textuelle n'est pas vide
                 if (data) {
+                    // affectation de la donnée à this.token
                     this.token = data;
+                    // on appelle la méthode de callback
                     callbackSuccess();
                 } else {
                     throw new Error("Problème de data ", data);
-                    //callbackFailed("Erreur de login ou de mot de passe");
                 }
             })
-            .catch(error => { console.error("Erreur attrapée dans getToken", error); });
+            .catch(error => { callbackFailed("Erreur dans getToken" + error.message); });
     };
 }
 
