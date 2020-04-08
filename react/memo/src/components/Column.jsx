@@ -13,10 +13,10 @@ class Column extends Component {
                     >+</button>
                     <h2 className="h5">{this.props.column.name}</h2>
                 </header>
-                {this.props.column.cards.map(card => {
+                {this.props.column.cartes.map(card => {
                     return <Card
                         question={card.question}
-                        answer={card.answer}
+                        answer={card.reponse}
                     />
                 })}
 

@@ -12,10 +12,10 @@ class Table extends Component {
         this.state = {
             // Tableau des colonnes
             columns: [
-                { id: 1, name: "A apprendre", cards: [] },
-                { id: 2, name: "Je sais un peu", cards: [] },
-                { id: 3, name: "Je sais bien", cards: [] },
-                { id: 4, name: "Je sais parfaitement", cards: [] }
+                { id: 1, name: "A apprendre", cartes: [] },
+                { id: 2, name: "Je sais un peu", cartes: [] },
+                { id: 3, name: "Je sais bien", cartes: [] },
+                { id: 4, name: "Je sais parfaitement", cartes: [] }
             ],
             // Tableau des termes (rubriques)
             terms: [],
@@ -111,7 +111,7 @@ class Table extends Component {
         // Ajout dans le state local de ma carte
         state_local
             .columns[state_local.index_column_adding_a_card]
-            .cards.push({ "id": 1, "question": question, "answer": answer });
+            .cartes.push({ "id": 1, "question": question, "reponse": answer });
 
         this.setState(state_local);
 
