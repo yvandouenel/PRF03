@@ -226,9 +226,18 @@ class Table extends Component {
         this.connection.getTerms(this.successGetTerms, this.failedGetTerms);
 
     }
-
+    /**
+     * Une fois que l'on a récupéré les colonnes et les cartes
+     * qui correspondent au terme cliqué, il s'agit ici
+     * de modifier le state via un setState pour obtenir l'affichage souhaité
+     */
     successGetCards = (data) => {
         console.log('dans succesGetCards');
+
+        const state_local = { ...this.state };
+        state_local.columns = data;
+
+        this.setState(state_local);
 
     }
     successGetTerms = (data) => {

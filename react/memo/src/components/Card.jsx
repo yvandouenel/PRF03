@@ -5,8 +5,8 @@ class Card extends Component {
     render() {
         return (
             <>
-                <h3>{this.state.question}</h3>
-                <p>{this.state.answer}</p>
+                <h3>{this.props.question}</h3>
+                <p>{this.props.answer}</p>
             </>
         );
     }
