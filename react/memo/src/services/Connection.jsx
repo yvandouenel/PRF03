@@ -102,6 +102,63 @@ class Connection {
             })
             .catch(error => { callbackFailed("Erreur dans getToken" + error.message); });
     };
+    editTerm = (
+        label,
+        tid,
+        callbackSuccess,
+        callbackFailed,
+        ptid = 0
+    ) => {
+        console.log("Dans editTerm de coopernet, envoie du label : ", label);
+        // utilisation de fetch
+        fetch(this.url_server + "memo/term?_format=hal_json", {
+            // permet d'accepter les cookies ?
+            credentials: "same-origin",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/hal+json",
+                "X-CSRF-Token": this.token,
+                Authorization: "Basic " + btoa(this.login + ":" + this.pwd) // btoa = encodage en base 64
+            },
+            body: JSON.stringify({
+                _links: {
+                    type: {
+                        href: this.url_server + "memo/term"
+                    }
+                },
+                label: [
+                    {
+                        value: label
+                    }
+                ],
+                tid: [
+                    {
+                        value: tid
+                    }
+                ],
+                ptid: [
+                    {
+                        value: ptid
+                    }
+                ]
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("data reçues dans editTerm : ", data);
+                if (data.hasOwnProperty("newtid")) {
+                    callbackSuccess(data.newtid, "added");
+                } else if (data.hasOwnProperty("updatedtid")) {
+                    callbackSuccess(data.updatedtid, "updated");
+                } else {
+                    throw new Error("Problème de données");
+                }
+            })
+            .catch(error => {
+                console.error("Erreur attrapée dans editTerm", error);
+                callbackFailed(error.message);
+            });
+    };
 }
 
 export default Connection;
